@@ -9,6 +9,9 @@ on:
       - '*'
 
 jobs:
+  permissions:
+    contents: write
+
   build:
 
     runs-on: ubuntu-latest
@@ -57,8 +60,7 @@ jobs:
         asset_name: Documentation
         tag: ${{ github.ref }}
         overwrite: true
-      permissions:
-        contents: write
+
 
 
     # - name: Build a binary wheel and a source tarball
