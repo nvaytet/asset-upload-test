@@ -10,10 +10,11 @@ on:
 
 jobs:
   build:
+    name: Build docs
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
+    # permissions:
+    #   contents: write
 
     steps:
     - uses: actions/checkout@v3
@@ -52,10 +53,10 @@ jobs:
         path: docs_html.zip
 
 
-    - name: Upload release assets
-      uses: softprops/action-gh-release@v1
-      with:
-        files: docs_html.zip
+    # - name: Upload release assets
+    #   uses: softprops/action-gh-release@v1
+    #   with:
+    #     files: docs_html.zip
 
     # - name: Upload release assets
     #   uses: shogo82148/actions-upload-release-asset@v1
@@ -64,21 +65,18 @@ jobs:
     #     asset_path: docs_html.zip
 
 
-  # # assets:
-  # #   needs: build
-  # #   runs-on: ubuntu-latest
-  # #   permissions:
-  # #     contents: write
-  # #   steps:
-  #   # - uses: actions/download-artifact@v3
-  #   - name: Upload release assets
-  #     uses: svenstaro/upload-release-action@v2
-  #     with:
-  #       repo_token: ${{ secrets.GITHUB_TOKEN }}
-  #       file: docs_html.zip
-  #       asset_name: Documentation
-  #       tag: ${{ github.ref }}
-  #       overwrite: false
+  assets:
+    name: Upload docs
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@v3
+    - name: Upload release assets
+      uses: softprops/action-gh-release@v1
+      with:
+        files: docs_html.zip
 
 
   # docs:
