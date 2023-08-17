@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v3
@@ -51,13 +53,13 @@ jobs:
 
 
 
-  assets:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/download-artifact@v3
+  # assets:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   steps:
+    # - uses: actions/download-artifact@v3
     - name: Upload release assets
       uses: svenstaro/upload-release-action@v2
       with:
@@ -65,7 +67,7 @@ jobs:
         file: docs_html.zip
         asset_name: Documentation
         tag: ${{ github.ref }}
-        overwrite: true
+        overwrite: false
 
 
   # docs:
