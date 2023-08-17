@@ -51,7 +51,7 @@ jobs:
   docs:
     needs: build
     uses: ./.github/workflows/assets.yml
-    secrets: inherit
+    # secrets: inherit
 
 
     # - name: Upload release assets
