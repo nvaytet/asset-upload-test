@@ -76,7 +76,7 @@ jobs:
     - name: Upload release assets
       uses: softprops/action-gh-release@v1
       with:
-        files: docs_html.zip
+        files: /home/runner/work/asset-upload-test/asset-upload-test/docs_html.zip
 
 
   # docs:
