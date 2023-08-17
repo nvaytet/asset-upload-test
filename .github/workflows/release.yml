@@ -65,7 +65,7 @@ jobs:
         file: docs_html.zip
         asset_name: Documentation
         tag: ${{ github.ref }}
-        overwrite: false
+        overwrite: true
 
 
   # docs:
