@@ -52,6 +52,7 @@ jobs:
 
 
   assets:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
