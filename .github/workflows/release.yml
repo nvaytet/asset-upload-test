@@ -11,8 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
     - uses: actions/checkout@v3
@@ -52,22 +50,27 @@ jobs:
 
 
 
-
-  # assets:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-    # - uses: actions/download-artifact@v3
-    - name: Upload release assets
-      uses: svenstaro/upload-release-action@v2
+    - uses: shogo82148/actions-upload-release-asset@v1
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: docs_html.zip
-        asset_name: Documentation
-        tag: ${{ github.ref }}
-        overwrite: false
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: docs_html.zip
+
+
+  # # assets:
+  # #   needs: build
+  # #   runs-on: ubuntu-latest
+  # #   permissions:
+  # #     contents: write
+  # #   steps:
+  #   # - uses: actions/download-artifact@v3
+  #   - name: Upload release assets
+  #     uses: svenstaro/upload-release-action@v2
+  #     with:
+  #       repo_token: ${{ secrets.GITHUB_TOKEN }}
+  #       file: docs_html.zip
+  #       asset_name: Documentation
+  #       tag: ${{ github.ref }}
+  #       overwrite: false
 
 
   # docs:
