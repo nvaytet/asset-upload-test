@@ -50,7 +50,8 @@ jobs:
 
 
 
-    - uses: shogo82148/actions-upload-release-asset@v1
+    - name: Upload release assets
+      uses: shogo82148/actions-upload-release-asset@v1
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: docs_html.zip
