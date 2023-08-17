@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -49,12 +52,16 @@ jobs:
         path: docs_html.zip
 
 
-
     - name: Upload release assets
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: softprops/action-gh-release@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: docs_html.zip
+        files: docs_html.zip
+
+    # - name: Upload release assets
+    #   uses: shogo82148/actions-upload-release-asset@v1
+    #   with:
+    #     upload_url: ${{ github.event.release.upload_url }}
+    #     asset_path: docs_html.zip
 
 
   # # assets:
