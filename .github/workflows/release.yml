@@ -45,12 +45,11 @@ jobs:
     - name: Build documentation
       run: |
         sphinx-build -b html docs/. docs_html
-        zip -r docs_html.zip docs_html
     - name: Archive documentation artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: docs_html.zip
-        path: docs_html.zip
+        name: docs_html
+        path: docs_html
 
 
     # - name: Upload release assets
@@ -75,10 +74,13 @@ jobs:
     - uses: actions/download-artifact@v3
     - run: |
         find . -name "docs_html.zip"
+        find . -name docs_html
+    - run: |
+        zip -r docs_html.zip docs_html
     - name: Upload release assets
       uses: softprops/action-gh-release@v1
       with:
-        files: /home/runner/work/asset-upload-test/asset-upload-test/docs_html.zip
+        files: ./docs_html.zip
 
 
   # docs:
