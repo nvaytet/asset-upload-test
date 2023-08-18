@@ -44,12 +44,12 @@ jobs:
     #     python -m pytest test
     - name: Build documentation
       run: |
-        sphinx-build -b html docs/. documentation-${{ github.ref_name }}
+        sphinx-build -b html docs/. docs_html
     - name: Archive documentation artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: documentation-${{ github.ref_name }}
-        path: documentation-${{ github.ref_name }}
+        name: docs_html
+        path: docs_html
 
 
   assets:
@@ -62,6 +62,7 @@ jobs:
     - uses: actions/download-artifact@v3
     - name: Zip documentation
       run: |
+        mv docs_html documentation-${{ github.ref_name }}
         zip -r documentation-${{ github.ref_name }}.zip documentation-${{ github.ref_name }}
     - name: Upload release assets
       uses: svenstaro/upload-release-action@v2
